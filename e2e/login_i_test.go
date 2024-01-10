@@ -3,14 +3,15 @@ package e2e_test
 import (
 	"bytes"
 	"encoding/json"
-	"io/ioutil"
+	"io"
 	"log"
 	"net/http"
 	"net/http/httptest"
 	"time"
 
-	"github.com/gogjango/gjango/model"
-	"github.com/gogjango/gjango/request"
+	"tiktok_tools/model"
+	"tiktok_tools/request"
+
 	"github.com/stretchr/testify/assert"
 )
 
@@ -35,7 +36,7 @@ func (suite *E2ETestSuite) TestLogin() {
 	}
 	defer resp.Body.Close()
 
-	body, err := ioutil.ReadAll(resp.Body)
+	body, err := io.ReadAll(resp.Body)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -67,7 +68,7 @@ func (suite *E2ETestSuite) TestRefreshToken() {
 	assert.Equal(t, http.StatusOK, resp.StatusCode)
 	assert.Nil(t, err)
 
-	body, err := ioutil.ReadAll(resp.Body)
+	body, err := io.ReadAll(resp.Body)
 	if err != nil {
 		log.Fatal(err)
 	}

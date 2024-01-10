@@ -3,8 +3,8 @@ package model_test
 import (
 	"testing"
 
-	"github.com/gogjango/gjango/mock"
-	"github.com/gogjango/gjango/model"
+	"tiktok_tools/mock"
+	"tiktok_tools/model"
 )
 
 func TestBeforeInsert(t *testing.T) {

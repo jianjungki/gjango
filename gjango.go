@@ -1,8 +1,8 @@
-package gjango
+package tiktok_tools
 
 import (
-	"github.com/gogjango/gjango/cmd"
-	"github.com/gogjango/gjango/route"
+	"tiktok_tools/cmd"
+	"tiktok_tools/route"
 )
 
 // New creates a new Gjango instance

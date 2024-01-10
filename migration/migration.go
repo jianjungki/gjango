@@ -6,11 +6,13 @@ import (
 	"log"
 	"os"
 
-	migrations "github.com/go-pg/migrations/v7"
-	"github.com/go-pg/pg/v9"
-	"github.com/go-pg/pg/v9/orm"
-	"github.com/gogjango/gjango/config"
-	"github.com/gogjango/gjango/model"
+	"tiktok_tools/config"
+	"tiktok_tools/model"
+	"tiktok_tools/model/tiktok"
+
+	migrations "github.com/go-pg/migrations/v8"
+	"github.com/go-pg/pg/v10"
+	"github.com/go-pg/pg/v10/orm"
 )
 
 const usageText = `This program runs command on the db. Supported commands are:
@@ -45,7 +47,7 @@ func Run(args ...string) error {
 	createDatabaseIfNotExist(dbSuper, p)
 
 	if flag.Arg(0) == "create_schema" {
-		createSchema(db, &model.Company{}, &model.Location{}, &model.Role{}, &model.User{}, &model.Verification{})
+		createSchema(db, &model.Company{}, &model.Location{}, &model.Role{}, &model.User{}, &model.Verification{}, &model.UserBind{}, &tiktok.TiktokShop{})
 		os.Exit(2)
 	}
 
@@ -111,7 +113,7 @@ func createSchema(db *pg.DB, models ...interface{}) {
 			IfNotExists:   true,
 			FKConstraints: true,
 		}
-		err := db.CreateTable(model, opt)
+		err := db.Model(model).CreateTable(opt)
 		if err != nil {
 			log.Fatal(err)
 		}

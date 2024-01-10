@@ -8,8 +8,8 @@ import (
 	"net/http"
 	"net/http/httptest"
 
-	"github.com/gogjango/gjango/request"
 	"github.com/stretchr/testify/assert"
+	"tiktok_tools/request"
 )
 
 func (suite *E2ETestSuite) TestSignupMobile() {

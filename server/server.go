@@ -5,11 +5,11 @@ import (
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
-	"github.com/gogjango/gjango/config"
-	"github.com/gogjango/gjango/mail"
-	mw "github.com/gogjango/gjango/middleware"
-	"github.com/gogjango/gjango/mobile"
-	"github.com/gogjango/gjango/route"
+	"tiktok_tools/config"
+	"tiktok_tools/mail"
+	mw "tiktok_tools/middleware"
+	"tiktok_tools/mobile"
+	"tiktok_tools/route"
 
 	"go.uber.org/zap"
 )

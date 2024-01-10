@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/gogjango/gjango/migration"
 	"github.com/spf13/cobra"
+	"tiktok_tools/migration"
 )
 
 // initCmd represents the init command

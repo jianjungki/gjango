@@ -4,12 +4,13 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"log"
 	"net/http"
 	"net/http/httptest"
 
-	"github.com/gogjango/gjango/request"
+	"tiktok_tools/request"
+
 	"github.com/stretchr/testify/assert"
 )
 
@@ -40,7 +41,7 @@ func (suite *E2ETestSuite) TestSignupEmail() {
 
 	assert.Equal(t, http.StatusCreated, resp.StatusCode)
 
-	body, err := ioutil.ReadAll(resp.Body)
+	body, err := io.ReadAll(resp.Body)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -68,7 +69,7 @@ func (suite *E2ETestSuite) TestVerification() {
 	defer resp.Body.Close()
 	assert.Equal(t, http.StatusOK, resp.StatusCode)
 
-	body, err := ioutil.ReadAll(resp.Body)
+	body, err := io.ReadAll(resp.Body)
 	if err != nil {
 		log.Fatal(err)
 	}

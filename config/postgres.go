@@ -7,7 +7,7 @@ import (
 	"strings"
 
 	"github.com/caarlos0/env/v6"
-	"github.com/go-pg/pg/v9"
+	"github.com/go-pg/pg/v10"
 )
 
 // PostgresConfig persists the config for our PostgreSQL database connection
@@ -40,8 +40,9 @@ func GetConnection() *pg.DB {
 	if err == nil {
 		c = validConfig
 	}
+	fmt.Println(validConfig.Host)
 	db := pg.Connect(&pg.Options{
-		Addr:     c.Host + ":" + c.Port,
+		Addr:     c.Host,
 		User:     c.User,
 		Password: c.Password,
 		Database: c.Database,
@@ -92,7 +93,7 @@ func validPostgresURL(URL string) (*PostgresConfig, error) {
 	c := &PostgresConfig{}
 	c.URL = URL
 	c.Host = validURL.Host
-	c.Database = validURL.Path
+	c.Database = strings.ReplaceAll(validURL.Path, "/", "")
 	c.Port = validURL.Port()
 	c.User = validURL.User.Username()
 	c.Password, _ = validURL.User.Password()

@@ -2,7 +2,7 @@ package request
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/gogjango/gjango/apperr"
+	"tiktok_tools/apperr"
 )
 
 // Credentials stores the username and password provided in the request

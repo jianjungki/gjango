@@ -1,4 +1,4 @@
-package repository_test
+package services_test
 
 import (
 	"os"
@@ -7,12 +7,13 @@ import (
 	"runtime"
 	"testing"
 
+	"tiktok_tools/apperr"
+	"tiktok_tools/model"
+	"tiktok_tools/secret"
+	"tiktok_tools/services"
+
 	embeddedpostgres "github.com/fergusstrange/embedded-postgres"
-	"github.com/go-pg/pg/v9"
-	"github.com/gogjango/gjango/apperr"
-	"github.com/gogjango/gjango/model"
-	"github.com/gogjango/gjango/repository"
-	"github.com/gogjango/gjango/secret"
+	"github.com/go-pg/pg/v10"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"
 	"go.uber.org/zap"
@@ -96,10 +97,10 @@ func (suite *UserTestSuite) TestUserView() {
 	for _, tt := range cases {
 		suite.T().Run(tt.name, func(t *testing.T) {
 			log, _ := zap.NewDevelopment()
-			userRepo := repository.NewUserRepo(tt.db, log)
+			userRepo := services.NewUserRepo(tt.db, log)
 
 			if tt.create {
-				accountRepo := repository.NewAccountRepo(tt.db, log, secret.New())
+				accountRepo := services.NewAccountRepo(tt.db, log, secret.New())
 				_, err := accountRepo.Create(tt.user)
 				assert.Nil(t, err)
 				u, err := userRepo.View(tt.user.ID)
@@ -153,7 +154,7 @@ func (suite *UserTestSuite) TestUserView() {
 func (suite *UserTestSuite) TestUpdateLoginFailure() {
 	u := suite.u
 	log, _ := zap.NewDevelopment()
-	userRepo := repository.NewUserRepo(suite.dbErr, log)
+	userRepo := services.NewUserRepo(suite.dbErr, log)
 	err := userRepo.UpdateLogin(u)
 	assert.NotNil(suite.T(), err)
 }
@@ -161,7 +162,7 @@ func (suite *UserTestSuite) TestUpdateLoginFailure() {
 func (suite *UserTestSuite) TestUpdateFailure() {
 	u := suite.u
 	log, _ := zap.NewDevelopment()
-	userRepo := repository.NewUserRepo(suite.dbErr, log)
+	userRepo := services.NewUserRepo(suite.dbErr, log)
 	u.Address = "some address"
 	user, err := userRepo.Update(u)
 	assert.NotNil(suite.T(), user)
@@ -171,14 +172,14 @@ func (suite *UserTestSuite) TestUpdateFailure() {
 func (suite *UserTestSuite) TestDeleteFailure() {
 	u := suite.u
 	log, _ := zap.NewDevelopment()
-	userRepo := repository.NewUserRepo(suite.dbErr, log)
+	userRepo := services.NewUserRepo(suite.dbErr, log)
 	err := userRepo.Delete(u)
 	assert.NotNil(suite.T(), err)
 }
 
 func (suite *UserTestSuite) TestListFailure() {
 	log, _ := zap.NewDevelopment()
-	userRepo := repository.NewUserRepo(suite.dbErr, log)
+	userRepo := services.NewUserRepo(suite.dbErr, log)
 	qp := &model.ListQuery{}
 	pag := &model.Pagination{Limit: 10, Offset: 0}
 	_, err := userRepo.List(qp, pag)

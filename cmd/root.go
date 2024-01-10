@@ -5,9 +5,9 @@ import (
 	"log"
 	"os"
 
-	"github.com/gogjango/gjango/route"
-	"github.com/gogjango/gjango/server"
 	"github.com/spf13/cobra"
+	"tiktok_tools/route"
+	"tiktok_tools/server"
 
 	homedir "github.com/mitchellh/go-homedir"
 	"github.com/spf13/viper"

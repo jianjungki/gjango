@@ -3,16 +3,16 @@ package main
 import (
 	"fmt"
 
-	"github.com/gogjango/gjango"
+	"tiktok_tools"
 )
 
 func main() {
-	gjango.New().
+	tiktok_tools.New().
 		WithRoutes(&MyServices{}).
 		Run()
 }
 
-// MyServices implements github.com/gogjango/gjango/route.ServicesI
+// MyServices implements tiktok_tools/route.ServicesI
 type MyServices struct{}
 
 // SetupRoutes is our implementation of custom routes

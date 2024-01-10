@@ -4,9 +4,9 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/gogjango/gjango/apperr"
-	"github.com/gogjango/gjango/model"
-	"github.com/gogjango/gjango/secret"
+	"tiktok_tools/apperr"
+	"tiktok_tools/model"
+	"tiktok_tools/secret"
 )
 
 // Service represents the account application service

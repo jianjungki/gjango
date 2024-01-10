@@ -1,8 +1,9 @@
-package repository
+package services
 
 import (
-	"github.com/go-pg/pg/v9"
-	"github.com/gogjango/gjango/model"
+	"tiktok_tools/model"
+
+	"github.com/go-pg/pg/v10"
 	"go.uber.org/zap"
 )
 

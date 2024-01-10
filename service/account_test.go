@@ -7,13 +7,14 @@ import (
 	"net/http/httptest"
 	"testing"
 
+	"tiktok_tools/mock"
+	"tiktok_tools/mock/mockdb"
+	"tiktok_tools/model"
+	"tiktok_tools/secret"
+	"tiktok_tools/service"
+	"tiktok_tools/services/account"
+
 	"github.com/gin-gonic/gin"
-	"github.com/gogjango/gjango/mock"
-	"github.com/gogjango/gjango/mock/mockdb"
-	"github.com/gogjango/gjango/model"
-	"github.com/gogjango/gjango/repository/account"
-	"github.com/gogjango/gjango/secret"
-	"github.com/gogjango/gjango/service"
 	"github.com/stretchr/testify/assert"
 )
 

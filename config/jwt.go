@@ -2,14 +2,15 @@ package config
 
 import (
 	"fmt"
-	"io/ioutil"
 	"log"
+	"os"
 	"path"
 	"path/filepath"
 	"runtime"
 	"strings"
 
-	"github.com/gogjango/gjango/secret"
+	"tiktok_tools/secret"
+
 	"github.com/joho/godotenv"
 	"github.com/mcuadros/go-defaults"
 	"github.com/spf13/viper"
@@ -41,7 +42,7 @@ func LoadJWT(env string) *JWT {
 				log.Fatal(err)
 			}
 			jwtString := fmt.Sprintf("JWT_SECRET=%s\n", s)
-			err = ioutil.WriteFile(dotenvPath, []byte(jwtString), 0644)
+			err = os.WriteFile(dotenvPath, []byte(jwtString), 0644)
 			if err != nil {
 				log.Fatal(err)
 			}

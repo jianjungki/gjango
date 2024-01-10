@@ -58,7 +58,7 @@ jobs:
             chmod +x ./cc-test-reporter
             ./cc-test-reporter before-build
             go test -coverprofile c.out ./...
-            ./cc-test-reporter after-build -t gocov -p github.com/gogjango/gjango -r ${TEST_REPORTER_ID}
+            ./cc-test-reporter after-build -t gocov -p tiktok_tools -r ${TEST_REPORTER_ID}
 
 workflows:
   version: 2

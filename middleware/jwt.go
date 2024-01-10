@@ -7,9 +7,9 @@ import (
 
 	jwt "github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
-	"github.com/gogjango/gjango/apperr"
-	"github.com/gogjango/gjango/config"
-	"github.com/gogjango/gjango/model"
+	"tiktok_tools/apperr"
+	"tiktok_tools/config"
+	"tiktok_tools/model"
 )
 
 // NewJWT generates new JWT variable necessery for auth middleware

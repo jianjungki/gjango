@@ -9,8 +9,9 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/go-pg/pg/v9/orm"
-	"github.com/gogjango/gjango/manager"
+	"tiktok_tools/manager"
+
+	"github.com/go-pg/pg/v10/orm"
 )
 
 type goPgDB struct {

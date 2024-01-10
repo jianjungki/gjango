@@ -1,6 +1,6 @@
 package mail
 
-import "github.com/gogjango/gjango/model"
+import "tiktok_tools/model"
 
 // Service is the interface to access our Mail
 type Service interface {

@@ -8,14 +8,15 @@ import (
 	"testing"
 	"time"
 
+	"tiktok_tools/apperr"
+	"tiktok_tools/mock"
+	"tiktok_tools/mock/mockdb"
+	"tiktok_tools/model"
+	"tiktok_tools/secret"
+	"tiktok_tools/service"
+	"tiktok_tools/services/auth"
+
 	"github.com/gin-gonic/gin"
-	"github.com/gogjango/gjango/apperr"
-	"github.com/gogjango/gjango/mock"
-	"github.com/gogjango/gjango/mock/mockdb"
-	"github.com/gogjango/gjango/model"
-	"github.com/gogjango/gjango/repository/auth"
-	"github.com/gogjango/gjango/secret"
-	"github.com/gogjango/gjango/service"
 
 	"github.com/stretchr/testify/assert"
 )

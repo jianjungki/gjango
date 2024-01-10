@@ -1,6 +1,6 @@
 package mock
 
-import "github.com/gogjango/gjango/model"
+import "tiktok_tools/model"
 
 // Mail mock
 type Mail struct {

@@ -1,11 +1,11 @@
-package repository
+package services
 
 import (
-	"github.com/go-pg/pg/v9/orm"
+	"github.com/go-pg/pg/v10/orm"
 	"go.uber.org/zap"
 
-	"github.com/gogjango/gjango/apperr"
-	"github.com/gogjango/gjango/model"
+	"tiktok_tools/apperr"
+	"tiktok_tools/model"
 )
 
 const notDeleted = "deleted_at is null"

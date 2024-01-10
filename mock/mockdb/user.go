@@ -1,7 +1,7 @@
 package mockdb
 
 import (
-	"github.com/gogjango/gjango/model"
+	"tiktok_tools/model"
 )
 
 // User database mock

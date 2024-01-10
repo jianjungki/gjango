@@ -3,7 +3,7 @@ package model_test
 import (
 	"testing"
 
-	"github.com/gogjango/gjango/model"
+	"tiktok_tools/model"
 )
 
 func TestUpdateLastLogin(t *testing.T) {

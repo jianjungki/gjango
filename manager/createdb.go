@@ -3,8 +3,9 @@ package manager
 import (
 	"fmt"
 
-	"github.com/go-pg/pg/v9"
-	"github.com/gogjango/gjango/config"
+	"tiktok_tools/config"
+
+	"github.com/go-pg/pg/v10"
 )
 
 // CreateDatabaseIfNotExist creates our postgresql database from postgres config

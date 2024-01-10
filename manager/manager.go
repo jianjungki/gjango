@@ -6,23 +6,24 @@ import (
 	"reflect"
 	"strings"
 
+	"tiktok_tools/model"
+	"tiktok_tools/secret"
+	"tiktok_tools/services"
+
 	"github.com/gertd/go-pluralize"
-	"github.com/go-pg/pg/v9"
-	"github.com/go-pg/pg/v9/orm"
-	"github.com/gogjango/gjango/model"
-	"github.com/gogjango/gjango/repository"
-	"github.com/gogjango/gjango/secret"
+	"github.com/go-pg/pg/v10"
+	"github.com/go-pg/pg/v10/orm"
 )
 
 // NewManager returns a new manager
-func NewManager(accountRepo *repository.AccountRepo, roleRepo *repository.RoleRepo, db *pg.DB) *Manager {
+func NewManager(accountRepo *services.AccountRepo, roleRepo *services.RoleRepo, db *pg.DB) *Manager {
 	return &Manager{accountRepo, roleRepo, db}
 }
 
 // Manager holds a group of methods for writing tests
 type Manager struct {
-	accountRepo *repository.AccountRepo
-	roleRepo    *repository.RoleRepo
+	accountRepo *services.AccountRepo
+	roleRepo    *services.RoleRepo
 	db          *pg.DB
 }
 
@@ -33,7 +34,7 @@ func (m *Manager) CreateSchema(models ...interface{}) {
 			IfNotExists:   true,
 			FKConstraints: true,
 		}
-		err := m.db.CreateTable(model, opt)
+		err := m.db.Model(model).CreateTable(opt)
 		if err != nil {
 			log.Fatal(err)
 		}

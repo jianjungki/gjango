@@ -11,12 +11,12 @@ func init() {
 // User represents user domain model
 type User struct {
 	Base
-	ID          int        `json:"id"`
-	FirstName   string     `json:"first_name"`
-	LastName    string     `json:"last_name"`
-	Username    string     `json:"username"`
-	Password    string     `json:"-"`
-	Email       string     `json:"email"`
+	ID          int        `json:"id" pg:"id"`
+	FirstName   string     `json:"first_name"  pg:"first_name"`
+	LastName    string     `json:"last_name"  pg:"last_name"`
+	Username    string     `json:"username"  pg:"username"`
+	Password    string     `json:"-"  pg:"password"`
+	Email       string     `json:"email" pg:"email"`
 	Mobile      string     `json:"mobile,omitempty"`
 	CountryCode string     `json:"country_code,omitempty"`
 	Address     string     `json:"address,omitempty"`
@@ -24,7 +24,7 @@ type User struct {
 	Verified    bool       `json:"verified"`
 	Active      bool       `json:"active"`
 	Token       string     `json:"-"`
-	Role        *Role      `json:"role,omitempty"`
+	Role        *Role      `json:"role,omitempty" pg:"rel:has-one"`
 	RoleID      int        `json:"-"`
 	CompanyID   int        `json:"company_id"`
 	LocationID  int        `json:"location_id"`

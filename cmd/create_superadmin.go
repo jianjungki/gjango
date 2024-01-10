@@ -4,10 +4,11 @@ import (
 	"fmt"
 	"regexp"
 
-	"github.com/gogjango/gjango/config"
-	"github.com/gogjango/gjango/manager"
-	"github.com/gogjango/gjango/repository"
-	"github.com/gogjango/gjango/secret"
+	"tiktok_tools/config"
+	"tiktok_tools/manager"
+	"tiktok_tools/secret"
+	"tiktok_tools/services"
+
 	"github.com/spf13/cobra"
 	"go.uber.org/zap"
 )
@@ -38,8 +39,8 @@ var createSuperAdminCmd = &cobra.Command{
 		db := config.GetConnection()
 		log, _ := zap.NewDevelopment()
 		defer log.Sync()
-		accountRepo := repository.NewAccountRepo(db, log, secret.New())
-		roleRepo := repository.NewRoleRepo(db, log)
+		accountRepo := services.NewAccountRepo(db, log, secret.New())
+		roleRepo := services.NewRoleRepo(db, log)
 
 		m := manager.NewManager(accountRepo, roleRepo, db)
 		m.CreateSuperAdmin(email, password)

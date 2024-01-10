@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	"github.com/gin-gonic/gin"
-	mw "github.com/gogjango/gjango/middleware"
+	mw "tiktok_tools/middleware"
 )
 
 func TestAdd(t *testing.T) {

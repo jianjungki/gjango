@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/gogjango/gjango/apperr"
+	"tiktok_tools/apperr"
 )
 
 // EmailSignup contains the user signup request

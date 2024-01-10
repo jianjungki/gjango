@@ -4,8 +4,8 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/gogjango/gjango/apperr"
-	"github.com/gogjango/gjango/model"
+	"tiktok_tools/apperr"
+	"tiktok_tools/model"
 )
 
 // RegisterAdmin contains admin registration request

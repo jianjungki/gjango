@@ -1,10 +1,12 @@
 package cmd
 
 import (
+	"encoding/json"
 	"fmt"
 
-	"github.com/gogjango/gjango/config"
-	"github.com/gogjango/gjango/manager"
+	"tiktok_tools/config"
+	"tiktok_tools/manager"
+
 	"github.com/spf13/cobra"
 )
 
@@ -16,6 +18,8 @@ var createdbCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("create_db called")
 		p := config.GetPostgresConfig()
+		jsonVal, _ := json.Marshal(p)
+		fmt.Printf("%s\n", jsonVal)
 
 		// connection to db as postgres superuser
 		dbSuper := config.GetPostgresSuperUserConnection()

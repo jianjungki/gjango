@@ -4,8 +4,8 @@ import (
 	"log"
 	"strconv"
 
-	"github.com/gogjango/gjango/migration"
 	"github.com/spf13/cobra"
+	"tiktok_tools/migration"
 )
 
 // upCmd represents the up command

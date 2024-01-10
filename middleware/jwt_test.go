@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/gin-gonic/gin"
-	"github.com/gogjango/gjango/config"
-	mw "github.com/gogjango/gjango/middleware"
-	"github.com/gogjango/gjango/mock"
-	"github.com/gogjango/gjango/model"
 	"github.com/stretchr/testify/assert"
+	"tiktok_tools/config"
+	mw "tiktok_tools/middleware"
+	"tiktok_tools/mock"
+	"tiktok_tools/model"
 )
 
 func hwHandler(c *gin.Context) {

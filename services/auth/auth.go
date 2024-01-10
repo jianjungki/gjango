@@ -7,12 +7,12 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/rs/xid"
 
-	"github.com/gogjango/gjango/apperr"
-	"github.com/gogjango/gjango/mail"
-	"github.com/gogjango/gjango/mobile"
-	"github.com/gogjango/gjango/model"
-	"github.com/gogjango/gjango/request"
-	"github.com/gogjango/gjango/secret"
+	"tiktok_tools/apperr"
+	"tiktok_tools/mail"
+	"tiktok_tools/mobile"
+	"tiktok_tools/model"
+	"tiktok_tools/request"
+	"tiktok_tools/secret"
 )
 
 // NewAuthService creates new auth service

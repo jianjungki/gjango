@@ -1,6 +1,6 @@
 package mockgopg
 
-import "github.com/go-pg/pg/v9/orm"
+import "github.com/go-pg/pg/v10/orm"
 
 // OrmResult struct to implements orm.Result
 type OrmResult struct {

@@ -4,7 +4,7 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/gogjango/gjango/manager"
+	"tiktok_tools/manager"
 )
 
 // SQLMock handles query mocks

@@ -1,8 +1,8 @@
 package e2e
 
 import (
-	"github.com/gogjango/gjango/manager"
-	"github.com/gogjango/gjango/model"
+	"tiktok_tools/manager"
+	"tiktok_tools/model"
 )
 
 // SetupDatabase creates the schema, populates it with data and returns with superadmin user

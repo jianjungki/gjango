@@ -1,11 +1,12 @@
 package user
 
 import (
+	"tiktok_tools/apperr"
+	"tiktok_tools/model"
+	"tiktok_tools/services/platform/query"
+	"tiktok_tools/services/platform/structs"
+
 	"github.com/gin-gonic/gin"
-	"github.com/gogjango/gjango/apperr"
-	"github.com/gogjango/gjango/model"
-	"github.com/gogjango/gjango/repository/platform/query"
-	"github.com/gogjango/gjango/repository/platform/structs"
 )
 
 // NewUserService create a new user application service

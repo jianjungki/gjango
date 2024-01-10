@@ -2,7 +2,7 @@ package request
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/gogjango/gjango/apperr"
+	"tiktok_tools/apperr"
 )
 
 // UpdateUser contains user update data from json request

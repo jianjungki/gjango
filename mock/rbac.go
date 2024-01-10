@@ -2,7 +2,7 @@ package mock
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/gogjango/gjango/model"
+	"tiktok_tools/model"
 )
 
 // RBAC Mock

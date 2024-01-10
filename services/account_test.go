@@ -1,16 +1,17 @@
-package repository_test
+package services_test
 
 import (
 	"net/http"
 	"testing"
 
-	"github.com/go-pg/pg/v9/orm"
-	"github.com/gogjango/gjango/apperr"
-	"github.com/gogjango/gjango/mock"
-	mck "github.com/gogjango/gjango/mock"
-	"github.com/gogjango/gjango/mockgopg"
-	"github.com/gogjango/gjango/model"
-	"github.com/gogjango/gjango/repository"
+	"tiktok_tools/apperr"
+	"tiktok_tools/mock"
+	mck "tiktok_tools/mock"
+	"tiktok_tools/mockgopg"
+	"tiktok_tools/model"
+	"tiktok_tools/services"
+
+	"github.com/go-pg/pg/v10/orm"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"
 	"go.uber.org/zap"
@@ -20,7 +21,7 @@ type AccountUnitTestSuite struct {
 	suite.Suite
 	mock        *mockgopg.SQLMock
 	u           *model.User
-	accountRepo *repository.AccountRepo
+	accountRepo *services.AccountRepo
 }
 
 func (suite *AccountUnitTestSuite) SetupTest() {
@@ -38,7 +39,7 @@ func (suite *AccountUnitTestSuite) SetupTest() {
 	}
 
 	log, _ := zap.NewDevelopment()
-	suite.accountRepo = repository.NewAccountRepo(db, log, &mock.Password{})
+	suite.accountRepo = services.NewAccountRepo(db, log, &mock.Password{})
 }
 
 func (suite *AccountUnitTestSuite) TearDownTest() {

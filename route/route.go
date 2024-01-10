@@ -1,17 +1,19 @@
 package route
 
 import (
+	"tiktok_tools/mail"
+	mw "tiktok_tools/middleware"
+	"tiktok_tools/mobile"
+	"tiktok_tools/secret"
+	"tiktok_tools/service"
+	"tiktok_tools/services"
+	"tiktok_tools/services/account"
+	"tiktok_tools/services/auth"
+	"tiktok_tools/services/tiktok"
+	"tiktok_tools/services/user"
+
 	"github.com/gin-gonic/gin"
-	"github.com/go-pg/pg/v9"
-	"github.com/gogjango/gjango/mail"
-	mw "github.com/gogjango/gjango/middleware"
-	"github.com/gogjango/gjango/mobile"
-	"github.com/gogjango/gjango/repository"
-	"github.com/gogjango/gjango/repository/account"
-	"github.com/gogjango/gjango/repository/auth"
-	"github.com/gogjango/gjango/repository/user"
-	"github.com/gogjango/gjango/secret"
-	"github.com/gogjango/gjango/service"
+	"github.com/go-pg/pg/v10"
 	"go.uber.org/zap"
 )
 
@@ -33,14 +35,19 @@ type Services struct {
 // SetupV1Routes instances various repos and services and sets up the routers
 func (s *Services) SetupV1Routes() {
 	// database logic
-	userRepo := repository.NewUserRepo(s.DB, s.Log)
-	accountRepo := repository.NewAccountRepo(s.DB, s.Log, secret.New())
-	rbac := repository.NewRBACService(userRepo)
+	tiktokShopRepo := services.NewTiktokShopRepo(s.DB, s.Log)
+	userRepo := services.NewUserRepo(s.DB, s.Log)
+	accountRepo := services.NewAccountRepo(s.DB, s.Log, secret.New())
+	rbac := services.NewRBACService(userRepo)
 
 	// service logic
 	authService := auth.NewAuthService(userRepo, accountRepo, s.JWT, s.Mail, s.Mobile)
 	accountService := account.NewAccountService(userRepo, accountRepo, rbac, secret.New())
 	userService := user.NewUserService(userRepo, authService, rbac)
+
+	tiktokService := tiktok.NewTiktokService(tiktokShopRepo, accountRepo)
+	// no prefix, no jwt
+	service.TiktokRouter(tiktokService, s.R)
 
 	// no prefix, no jwt
 	service.AuthRouter(authService, s.R)

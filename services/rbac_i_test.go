@@ -1,4 +1,4 @@
-package repository_test
+package services_test
 
 import (
 	"net/http/httptest"
@@ -8,13 +8,14 @@ import (
 	"runtime"
 	"testing"
 
+	"tiktok_tools/model"
+	"tiktok_tools/secret"
+	"tiktok_tools/services"
+	"tiktok_tools/services/account"
+
 	embeddedpostgres "github.com/fergusstrange/embedded-postgres"
 	"github.com/gin-gonic/gin"
-	"github.com/go-pg/pg/v9"
-	"github.com/gogjango/gjango/model"
-	"github.com/gogjango/gjango/repository"
-	"github.com/gogjango/gjango/repository/account"
-	"github.com/gogjango/gjango/secret"
+	"github.com/go-pg/pg/v10"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"
 	"go.uber.org/zap"
@@ -74,12 +75,12 @@ func (suite *RBACTestSuite) TestRBAC() {
 
 	// create a user in our test database, which is superadmin
 	log, _ := zap.NewDevelopment()
-	userRepo := repository.NewUserRepo(suite.db, log)
-	accountRepo := repository.NewAccountRepo(suite.db, log, secret.New())
-	rbac := repository.NewRBACService(userRepo)
+	userRepo := services.NewUserRepo(suite.db, log)
+	accountRepo := services.NewAccountRepo(suite.db, log, secret.New())
+	rbac := services.NewRBACService(userRepo)
 
 	// ensure that our roles table is populated with default roles
-	roleRepo := repository.NewRoleRepo(suite.db, log)
+	roleRepo := services.NewRoleRepo(suite.db, log)
 	err := roleRepo.CreateRoles()
 	assert.Nil(suite.T(), err)
 

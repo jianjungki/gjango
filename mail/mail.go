@@ -3,10 +3,10 @@ package mail
 import (
 	"os"
 
-	"github.com/gogjango/gjango/config"
-	"github.com/gogjango/gjango/model"
 	"github.com/sendgrid/sendgrid-go"
 	s "github.com/sendgrid/sendgrid-go/helpers/mail"
+	"tiktok_tools/config"
+	"tiktok_tools/model"
 )
 
 // NewMail generates new Mail variable

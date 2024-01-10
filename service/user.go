@@ -3,11 +3,12 @@ package service
 import (
 	"net/http"
 
+	"tiktok_tools/apperr"
+	"tiktok_tools/model"
+	"tiktok_tools/request"
+	"tiktok_tools/services/user"
+
 	"github.com/gin-gonic/gin"
-	"github.com/gogjango/gjango/apperr"
-	"github.com/gogjango/gjango/model"
-	"github.com/gogjango/gjango/repository/user"
-	"github.com/gogjango/gjango/request"
 )
 
 // User represents the user http service

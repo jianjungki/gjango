@@ -5,7 +5,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"gopkg.in/go-playground/validator.v8"
+	"github.com/go-playground/validator/v10"
 )
 
 // APPError is the default error struct containing detailed information about the error
@@ -74,7 +74,7 @@ func Response(c *gin.Context, err error) {
 		var errMsg []string
 		e := err.(validator.ValidationErrors)
 		for _, v := range e {
-			errMsg = append(errMsg, fmt.Sprintf("%s%s", v.Name, getVldErrorMsg(v.ActualTag)))
+			errMsg = append(errMsg, fmt.Sprintf("%s%s", v.Type().Name(), getVldErrorMsg(v.ActualTag())))
 		}
 		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"message": errMsg})
 	default:

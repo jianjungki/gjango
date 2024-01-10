@@ -1,8 +1,8 @@
 package query
 
 import (
-	"github.com/gogjango/gjango/apperr"
-	"github.com/gogjango/gjango/model"
+	"tiktok_tools/apperr"
+	"tiktok_tools/model"
 )
 
 // List prepares data for list queries

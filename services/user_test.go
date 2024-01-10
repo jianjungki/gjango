@@ -1,12 +1,13 @@
-package repository_test
+package services_test
 
 import (
 	"testing"
 
-	"github.com/go-pg/pg/v9/orm"
-	"github.com/gogjango/gjango/mockgopg"
-	"github.com/gogjango/gjango/model"
-	"github.com/gogjango/gjango/repository"
+	"tiktok_tools/mockgopg"
+	"tiktok_tools/model"
+	"tiktok_tools/services"
+
+	"github.com/go-pg/pg/v10/orm"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"
 	"go.uber.org/zap"
@@ -16,7 +17,7 @@ type UserUnitTestSuite struct {
 	suite.Suite
 	mock     *mockgopg.SQLMock
 	u        *model.User
-	userRepo *repository.UserRepo
+	userRepo *services.UserRepo
 }
 
 func (suite *UserUnitTestSuite) SetupTest() {
@@ -35,7 +36,7 @@ func (suite *UserUnitTestSuite) SetupTest() {
 	}
 
 	log, _ := zap.NewDevelopment()
-	suite.userRepo = repository.NewUserRepo(db, log)
+	suite.userRepo = services.NewUserRepo(db, log)
 }
 
 func (suite *UserUnitTestSuite) TearDownTest() {

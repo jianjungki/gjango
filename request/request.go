@@ -5,7 +5,7 @@ import (
 	"strconv"
 
 	"github.com/gin-gonic/gin"
-	"github.com/gogjango/gjango/apperr"
+	"tiktok_tools/apperr"
 )
 
 const (

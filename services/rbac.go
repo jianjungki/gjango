@@ -1,8 +1,9 @@
-package repository
+package services
 
 import (
+	"tiktok_tools/model"
+
 	"github.com/gin-gonic/gin"
-	"github.com/gogjango/gjango/model"
 )
 
 // NewRBACService creates new RBAC service

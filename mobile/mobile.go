@@ -2,14 +2,14 @@ package mobile
 
 import (
 	"fmt"
-	"io/ioutil"
+	"io"
 	"log"
 	"net/http"
 	"net/url"
 	"strconv"
 	"strings"
 
-	"github.com/gogjango/gjango/config"
+	"tiktok_tools/config"
 )
 
 // NewMobile creates a new mobile service implementation
@@ -35,7 +35,7 @@ func (m *Mobile) GenerateSMSToken(countryCode, mobile string) error {
 		return err
 	}
 
-	bodyBytes, err := ioutil.ReadAll(resp.Body)
+	bodyBytes, err := io.ReadAll(resp.Body)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -58,7 +58,7 @@ func (m *Mobile) CheckCode(countryCode, mobile, code string) error {
 	// take a look at our response
 	fmt.Println(resp.StatusCode)
 	fmt.Println(resp.Body)
-	bodyBytes, err := ioutil.ReadAll(resp.Body)
+	bodyBytes, err := io.ReadAll(resp.Body)
 	if err != nil {
 		log.Fatal(err)
 	}

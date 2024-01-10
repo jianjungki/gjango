@@ -1,12 +1,14 @@
 package service
 
 import (
+	"fmt"
 	"net/http"
 
+	"tiktok_tools/apperr"
+	"tiktok_tools/request"
+	"tiktok_tools/services/auth"
+
 	"github.com/gin-gonic/gin"
-	"github.com/gogjango/gjango/apperr"
-	"github.com/gogjango/gjango/repository/auth"
-	"github.com/gogjango/gjango/request"
 )
 
 // AuthRouter creates new auth http service
@@ -28,6 +30,7 @@ type Auth struct {
 func (a *Auth) login(c *gin.Context) {
 	cred, err := request.Login(c)
 	if err != nil {
+		fmt.Println(err.Error())
 		return
 	}
 	r, err := a.svc.Authenticate(c, cred.Email, cred.Password)

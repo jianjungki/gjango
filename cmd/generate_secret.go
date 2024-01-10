@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/gogjango/gjango/secret"
 	"github.com/spf13/cobra"
+	"tiktok_tools/secret"
 )
 
 // createCmd represents the migrate command

@@ -1,12 +1,14 @@
-package repository
+package services
 
 import (
+	"fmt"
 	"net/http"
 
-	"github.com/go-pg/pg/v9/orm"
-	"github.com/gogjango/gjango/apperr"
-	"github.com/gogjango/gjango/model"
-	"github.com/gogjango/gjango/secret"
+	"tiktok_tools/apperr"
+	"tiktok_tools/model"
+	"tiktok_tools/secret"
+
+	"github.com/go-pg/pg/v10/orm"
 	uuid "github.com/satori/go.uuid"
 	"go.uber.org/zap"
 )
@@ -29,13 +31,15 @@ func (a *AccountRepo) Create(u *model.User) (*model.User, error) {
 	sql := `SELECT id FROM users WHERE username = ? OR email = ? OR (country_code = ? AND mobile = ?) AND deleted_at IS NULL`
 	res, err := a.db.Query(user, sql, u.Username, u.Email, u.CountryCode, u.Mobile)
 	if err != nil {
+		fmt.Println(err.Error())
 		a.log.Error("AccountRepo Error: ", zap.Error(err))
 		return nil, apperr.DB
 	}
 	if res.RowsReturned() != 0 {
+		fmt.Println("user exists in database")
 		return nil, apperr.New(http.StatusBadRequest, "User already exists.")
 	}
-	if err := a.db.Insert(u); err != nil {
+	if _, err := a.db.Model(u).Insert(); err != nil {
 		a.log.Warn("AccountRepo error: ", zap.Error(err))
 		return nil, apperr.DB
 	}
@@ -55,14 +59,14 @@ func (a *AccountRepo) CreateAndVerify(u *model.User) (*model.Verification, error
 	if res.RowsReturned() != 0 {
 		return nil, apperr.New(http.StatusBadRequest, "User already exists.")
 	}
-	if err := a.db.Insert(u); err != nil {
+	if _, err := a.db.Model(u).Insert(); err != nil {
 		a.log.Warn("AccountRepo error: ", zap.Error(err))
 		return nil, apperr.DB
 	}
 	v := new(model.Verification)
 	v.UserID = u.ID
 	v.Token = uuid.NewV4().String()
-	if err := a.db.Insert(v); err != nil {
+	if _, err := a.db.Model(v).Insert(); err != nil {
 		a.log.Warn("AccountRepo error: ", zap.Error(err))
 		return nil, apperr.DB
 	}
@@ -89,7 +93,7 @@ func (a *AccountRepo) CreateWithMobile(u *model.User) error {
 	if err != nil {
 		return apperr.DB
 	}
-	if err := a.db.Insert(u); err != nil {
+	if _, err := a.db.Model(u).Insert(); err != nil {
 		a.log.Warn("AccountRepo error: ", zap.Error(err))
 		return apperr.DB
 	}
