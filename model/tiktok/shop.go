@@ -9,6 +9,7 @@ func init() {
 // TiktokShop model
 type TiktokShop struct {
 	model.Base
+	ID                   int64  `json:"id" pg:"id"`
 	AccessToken          string `json:"access_token"`
 	AccessTokenExpireIn  int    `json:"access_token_expire_in"`
 	RefreshToken         string `json:"refresh_token"`
