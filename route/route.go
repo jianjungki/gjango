@@ -8,6 +8,7 @@ import (
 	"tiktok_tools/service"
 	"tiktok_tools/services"
 	"tiktok_tools/services/account"
+	"tiktok_tools/services/apify"
 	"tiktok_tools/services/auth"
 	"tiktok_tools/services/tiktok"
 	"tiktok_tools/services/user"
@@ -48,6 +49,10 @@ func (s *Services) SetupV1Routes() {
 	tiktokService := tiktok.NewTiktokService(tiktokShopRepo, accountRepo)
 	// no prefix, no jwt
 	service.TiktokRouter(tiktokService, s.R)
+
+	apifyService := apify.NewApifyService()
+	// no prefix, no jwt
+	service.ApifyRouter(apifyService, s.R)
 
 	// no prefix, no jwt
 	service.AuthRouter(authService, s.R)
