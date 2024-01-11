@@ -7,6 +7,7 @@ import (
 	"tiktok_tools/client"
 	"tiktok_tools/model"
 	"tiktok_tools/model/tiktok"
+	"tiktok_tools/secret"
 	"tiktok_tools/services"
 
 	"github.com/gin-gonic/gin"
@@ -14,7 +15,8 @@ import (
 
 // EmailSignup contains the user signup request
 type TiktokSignup struct {
-	OpenID          string `json:"open_id" binding:"required"`
+	BindID          int    `json:"bind_id"  binding:"required"`
+	OpenID          string `json:"open_id"`
 	Email           string `json:"email" binding:"required,min=5,email"`
 	Password        string `json:"password" binding:"required,min=8"`
 	PasswordConfirm string `json:"password_confirm" binding:"required"`
@@ -78,15 +80,27 @@ func (s *Service) BindUser(c *gin.Context) {
 		c.AbortWithStatusJSON(http.StatusBadRequest, err)
 		return
 	}
+	//创建用户
 	user, err := s.accountRepo.Create(&model.User{
-		Email: r.Email,
+		Email:    r.Email,
+		Password: secret.New().HashPassword(r.Password),
 	})
 	if err != nil {
-		log.Fatalf("create shop from tiktok failed: %s", err.Error())
+		log.Fatalf("create user failed: %s", err.Error())
+		return
+	}
+	//创建用户和 Tiktok 绑定关系
+	userBind, err := s.shopRepo.BindUser(&model.UserBind{
+		UserID:   user.ID,
+		BindID:   r.BindID,
+		BindType: "tiktok",
+	})
+	if err != nil {
+		log.Fatalf("create user bind  failed: %s", err.Error())
 		return
 	}
 	c.JSON(200, gin.H{
-		"message": user,
+		"message": userBind,
 	})
 }
 

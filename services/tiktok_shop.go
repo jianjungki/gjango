@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/http"
 	"tiktok_tools/apperr"
+	"tiktok_tools/model"
 	"tiktok_tools/model/tiktok"
 
 	"github.com/go-pg/pg/v10/orm"
@@ -40,6 +41,27 @@ func (a *TiktokShopRepo) Create(s *tiktok.TiktokShop) (*tiktok.TiktokShop, error
 		return nil, apperr.DB
 	}
 	return s, nil
+}
+
+// Create creates a new tiktok shop in our database
+func (a *TiktokShopRepo) BindUser(u *model.UserBind) (*model.UserBind, error) {
+	shop := new(tiktok.TiktokShop)
+	sql := `SELECT id FROM user_bind WHERE bind_id = ? and user_id = ? and deleted_at IS NULL`
+	res, err := a.db.Query(shop, sql, u.BindID, u.UserID)
+	if err != nil {
+		fmt.Println(err.Error())
+		a.log.Error("Query user bind Error: ", zap.Error(err))
+		return nil, apperr.DB
+	}
+	if res.RowsReturned() != 0 {
+		fmt.Println("user bind exists in database")
+		return nil, apperr.New(http.StatusBadRequest, "user bind already exists.")
+	}
+	if _, err := a.db.Model(u).Insert(); err != nil {
+		a.log.Warn("user bind error: ", zap.Error(err))
+		return nil, apperr.DB
+	}
+	return u, nil
 }
 
 // DeleteVerificationToken sets deleted_at for an existing verification token

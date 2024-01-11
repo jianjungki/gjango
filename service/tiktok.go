@@ -10,6 +10,7 @@ import (
 func TiktokRouter(svc *tiktok.Service, r *gin.Engine) {
 	t := TiktokSevice{svc}
 	r.GET("/tiktok/auth", t.svc.AuthLink)
+	r.POST("/tiktok/bind", t.svc.BindUser)
 	r.GET("/tiktok/webhook", t.svc.WebHook)
 
 }
