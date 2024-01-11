@@ -2,12 +2,11 @@ package main
 
 import (
 	"fmt"
-
-	"tiktok_tools"
+	"tiktok_tools/base"
 )
 
 func main() {
-	tiktok_tools.New().
+	base.New().
 		WithRoutes(&MyServices{}).
 		Run()
 }

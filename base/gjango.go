@@ -1,4 +1,4 @@
-package tiktok_tools
+package base
 
 import (
 	"tiktok_tools/cmd"
