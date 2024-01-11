@@ -46,7 +46,7 @@ func (a *TiktokShopRepo) Create(s *tiktok.TiktokShop) (*tiktok.TiktokShop, error
 // Create creates a new tiktok shop in our database
 func (a *TiktokShopRepo) BindUser(u *model.UserBind) (*model.UserBind, error) {
 	shop := new(tiktok.TiktokShop)
-	sql := `SELECT id FROM user_bind WHERE bind_id = ? and user_id = ? and deleted_at IS NULL`
+	sql := `SELECT id FROM user_binds WHERE bind_id = ? and user_id = ? and deleted_at IS NULL`
 	res, err := a.db.Query(shop, sql, u.BindID, u.UserID)
 	if err != nil {
 		fmt.Println(err.Error())
