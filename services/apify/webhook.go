@@ -18,11 +18,11 @@ type Service struct {
 }
 
 type ActionWebHook struct {
-	UserID    string                 `json:"userId" binding:"required"`
-	CreatedAt string                 `json:"createdAt" binding:"required"`
-	EventType string                 `json:"eventType" binding:"required"`
-	EventData map[string]interface{} `json:"eventData" binding:"required"`
-	Resource  map[string]interface{} `json:"resource" binding:"required"`
+	UserID    string                 `json:"userId"`
+	CreatedAt string                 `json:"createdAt"`
+	EventType string                 `json:"eventType"`
+	EventData map[string]interface{} `json:"eventData"`
+	Resource  map[string]interface{} `json:"resource"`
 }
 
 /**
