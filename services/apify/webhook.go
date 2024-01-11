@@ -42,10 +42,12 @@ func (s *Service) WebHook(c *gin.Context) {
 		apperr.Response(c, err)
 		return
 	}
-
-	for header, value := range r.Resource {
-		valueStr, _ := json.Marshal(value)
-		log.Println("header: " + header + "\tvalue: " + string(valueStr))
+	log.Println("event type: " + r.EventType)
+	if r.Resource != nil {
+		for header, value := range r.Resource {
+			valueStr, _ := json.Marshal(value)
+			log.Println("header: " + header + "\tvalue: " + string(valueStr))
+		}
 	}
 
 	c.JSON(200, gin.H{
